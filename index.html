@@ -183,8 +183,8 @@
             <!-- Pergunta sobre Introversão -->
             <div class="question">
                 <p>10. Apresenta introversão ao responder perguntas e atividades propostas em sala?</p>
-                <label><input type="radio" name="introversion" value="sim"> Sim</label>
-                <label><input type="radio" name="introversion" value="nao"> Não</label>
+                <label><input type="radio" name="q10" value="sim"> Sim</label>
+                <label><input type="radio" name="q10" value="nao"> Não</label>
             </div>
 
             <!-- Adjetivos -->
@@ -235,29 +235,32 @@
                 q7: form.q7.value,
                 q8: form.q8.value,
                 q9: form.q9.value,
-                introversion: form.introversion.value,
+                q10: form.q10.value,
             };
     
             // Adjetivos
             const adjectives = Array.from(form.querySelectorAll("input[name='adjectives']:checked"))
                 .map((checkbox) => checkbox.value)
-                .join(", ") || "Nenhum";
+                .filter(value => value !== "nenhum"); // Filtra o "nenhum"
+    
+            const adjectivesText = adjectives.length > 0 ? `é um aluno ${adjectives.join(", ")}.` : "";
     
             // Construção dos pontos com base nas respostas
             const points = [
-                answers.q1 === "sim" ? "Demonstrou responsabilidade ao completar todas as atividades enviadas para casa, evidenciando organização e compromisso." : "Nem todas as atividades enviadas para casa foram concluídas, mas está demonstrando maior interesse com o apoio oferecido pela família e pela escola.",
-                answers.q2 === "sim" ? "Mostrou facilidade em interagir com os colegas, promovendo um ambiente de cooperação e respeito." : "Apresentou desafios ao se relacionar com os colegas, mas está desenvolvendo habilidades sociais mais consistentes através das dinâmicas em grupo.",
-                answers.q3 === "sim" ? "Revela um interesse genuíno por livros e ilustrações, apreciando momentos de leitura e explorando com curiosidade os materiais." : "Ainda precisa de maior incentivo para se envolver com livros e histórias, mas tem mostrado progressos graduais durante as atividades de leitura compartilhada.",
-                answers.q4 === "sim" ? "Participa com entusiasmo das atividades recreativas, explorando diferentes formas de interação e movimento." : "Embora sua participação nas atividades recreativas seja mais reservada, está gradualmente se envolvendo com mais frequência e confiança.",
-                answers.q5 === "sim" ? "Demonstra atenção e respeito às regras e combinados da sala, contribuindo para um ambiente tranquilo e organizado." : "Em alguns momentos teve dificuldade em seguir as regras da sala, mas está aprendendo a compreender sua importância e aplicar esses combinados no dia a dia.",
-                answers.q6 === "sim" ? "Explorou novos conceitos com curiosidade e dedicação, aproveitando as atividades propostas para expandir seu aprendizado." : "Ainda apresenta certa hesitação para explorar novos conceitos, mas está progredindo ao engajar-se mais ativamente nas propostas em sala de aula.",
-                answers.q7 === "sim" ? "Enriqueceu as rodas de conversa com sua participação, ouvindo atentamente e compartilhando ideias de maneira clara." : "Participa com timidez nas rodas de conversa, mas vem desenvolvendo confiança para se expressar e contribuir com suas ideias.",
-                answers.q8 === "sim" ? "Avançou significativamente na coordenação motora fina, executando atividades com maior precisão e criatividade." : "Ainda em processo de desenvolvimento da coordenação motora fina, vem demonstrando esforço e avanço em atividades práticas.",
-                answers.q9 === "sim" ? "Atuou de forma solidária nas atividades em grupo, oferecendo apoio e demonstrando empatia pelos colegas." : "Apesar de enfrentar algumas dificuldades em atividades coletivas, está aprimorando sua habilidade de colaborar e ser solidário nas interações."
-            ].join(" ");
+    answers.q1 === "sim" ? "Demonstrou responsabilidade ao completar todas as atividades enviadas para casa, evidenciando organização e compromisso." : "Nem todas as atividades enviadas para casa foram concluídas, mas está demonstrando maior interesse com o apoio oferecido pela família e pela escola.",
+    answers.q2 === "sim" ? "Mostrou facilidade em interagir com os colegas, promovendo um ambiente de cooperação e respeito." : "Apresentou desafios ao se relacionar com os colegas, mas está desenvolvendo habilidades sociais mais consistentes através das dinâmicas em grupo.",
+    answers.q3 === "sim" ? "Revela um interesse genuíno por livros e ilustrações, apreciando momentos de leitura e explorando com curiosidade os materiais." : "Ainda precisa de maior incentivo para se envolver com livros e histórias, mas tem mostrado progressos graduais durante as atividades de leitura compartilhada.",
+    answers.q4 === "sim" ? "Participa com entusiasmo das atividades recreativas, explorando diferentes formas de interação e movimento." : "Embora sua participação nas atividades recreativas seja mais reservada, está gradualmente se envolvendo com mais frequência e confiança.",
+    answers.q5 === "sim" ? "Demonstra atenção e respeito às regras e combinados da sala, contribuindo para um ambiente tranquilo e organizado." : "Em alguns momentos teve dificuldade em seguir as regras da sala, mas está aprendendo a compreender sua importância e aplicar esses combinados no dia a dia.",
+    answers.q6 === "sim" ? "Explorou novos conceitos com curiosidade e dedicação, aproveitando as atividades propostas para expandir seu aprendizado." : "Ainda apresenta certa hesitação para explorar novos conceitos, mas está progredindo ao engajar-se mais ativamente nas propostas em sala de aula.",
+    answers.q10 === "sim" ? "Apresenta introversão ao responder perguntas e realizar atividades propostas em sala, mostrando certa timidez e reservamento." : "Participa ativamente nas atividades e interações, sem apresentar sinais de introversão.",
+    answers.q7 === "sim" ? "Enriqueceu as rodas de conversa com sua participação, ouvindo atentamente e compartilhando ideias de maneira clara." : "apresenta certa resistência nas rodas de conversa, mas vem desenvolvendo confiança para se expressar e contribuir com suas ideias.",
+    answers.q8 === "sim" ? "Avançou significativamente na coordenação motora fina, executando atividades com maior precisão e criatividade." : "Ainda em processo de desenvolvimento da coordenação motora fina, vem demonstrando esforço e avanço em atividades práticas.",
+    answers.q9 === "sim" ? "Atuou de forma solidária nas atividades em grupo, oferecendo apoio e demonstrando empatia pelos colegas." : "Apesar de enfrentar algumas dificuldades em atividades coletivas, está aprimorando sua habilidade de colaborar e ser solidário nas interações."
     
-            // Mensagem sobre introversão
-            const introversion = answers.introversion === "sim" ? "Apesar disso, ainda apresenta introversão ao responder perguntas e realizar atividades propostas em sala." : "Não apresenta introversão, participando de forma ativa nas atividades e interações.";
+].join(" ");
+    
+          
     
             // Montar o relatório
             const intro = `
@@ -271,10 +274,10 @@
             `;
     
             // Exibir o relatório
-            document.getElementById("report").innerHTML = `${intro}<br><br>${studentIntro} ${points}<br><br>${introversion}<br><br><strong>Qualidades Adicionais:</strong> ${adjectives}.<br><br>${conclusion}`;
+            document.getElementById("report").innerHTML = `${intro}<br><br>${studentIntro} ${points}<br><br>${answers.q10 === "sim" ? "Apresenta introversão ao responder perguntas e realizar atividades propostas em sala, mostrando certa timidez e reservamento." : "Participa ativamente nas atividades e interações, sem apresentar sinais de introversão."}<br><br>${adjectivesText}<br><br>${conclusion}`;
+
         });
     </script>
-    
 </body>
 
 </html>
