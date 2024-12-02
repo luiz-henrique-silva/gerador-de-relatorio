@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerador de Relatório</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .question {
+            margin-bottom: 20px;
+        }
+
+        .question p {
+            font-weight: bold;
+        }
+
+        label {
+            margin-right: 15px;
+        }
+
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .report {
+            margin-top: 20px;
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            font-style: italic;
+            color: #333;
+        }
+
+        /* Responsividade para telas pequenas */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%; /* Aumenta a largura do container em telas pequenas */
+                padding: 15px;
+            }
+
+            h1 {
+                font-size: 24px; /* Tamanho da fonte do título menor em telas pequenas */
+            }
+
+            .question p {
+                font-size: 14px; /* Diminui o tamanho da fonte das perguntas */
+            }
+
+            button {
+                font-size: 14px; /* Diminui o tamanho da fonte do botão */
+                padding: 8px 16px; /* Ajusta o padding do botão */
+            }
+
+            .report {
+                font-size: 14px; /* Diminui o tamanho da fonte do relatório */
+                padding: 10px;
+            }
+        }
+
+        /* Responsividade para telas muito pequenas (celulares em modo retrato) */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 20px; /* Título ainda menor */
+            }
+
+            .question p {
+                font-size: 12px; /* Fonte das perguntas ainda menor */
+            }
+
+            label {
+                font-size: 12px; /* Diminui o tamanho da fonte dos labels */
+                margin-right: 10px; /* Menos espaço entre os labels */
+            }
+
+            button {
+                font-size: 12px; /* Botão menor */
+                padding: 6px 12px; /* Ajuste no tamanho do botão */
+            }
+
+            .report {
+                font-size: 12px; /* Texto do relatório menor */
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Gerador de Relatório</h1>
+        <form id="report-form">
+
+            <div class="question">
+                <p>Nome do Aluno:</p>
+                <input type="text" id="student-name" placeholder="Digite o nome do aluno" required>
+            </div>
+            <div class="question">
+                <p>Gênero:</p>
+                <label><input type="radio" name="gender" value="masculino" required> Masculino</label>
+                <label><input type="radio" name="gender" value="feminino" required> Feminino</label>
+            </div>
+
+            <!-- Perguntas -->
+            <div class="question">
+                <p>1. Realizou todas as atividades enviadas para casa?</p>
+                <label><input type="radio" name="q1" value="sim"> Sim</label>
+                <label><input type="radio" name="q1" value="nao"> Não</label>
+            </div>
+            <div class="question">
+                <p>2. Tem um bom relacionamento com os colegas?</p>
+                <label><input type="radio" name="q2" value="sim"> Sim</label>
+                <label><input type="radio" name="q2" value="nao"> Não</label>
+            </div>
+            <div class="question">
+                <p>3. Demonstra interesse por livros e histórias?</p>
+                <label><input type="radio" name="q3" value="sim"> Sim</label>
+                <label><input type="radio" name="q3" value="nao"> Não</label>
+            </div>
+            <div class="question">
+                <p>4. Participa das atividades recreativas com entusiasmo?</p>
+                <label><input type="radio" name="q4" value="sim"> Sim</label>
+                <label><input type="radio" name="q4" value="nao"> Não</label>
+            </div>
+            <div class="question">
+                <p>5. Respeita as regras e combinados em sala?</p>
+                <label><input type="radio" name="q5" value="sim"> Sim</label>
+                <label><input type="radio" name="q5" value="nao"> Não</label>
+            </div>
+            <div class="question">
+                <p>6. Demonstra curiosidade em aprender novos conceitos?</p>
+                <label><input type="radio" name="q6" value="sim"> Sim</label>
+                <label><input type="radio" name="q6" value="nao"> Não</label>
+            </div>
+            <div class="question">
+                <p>7. Participa das rodas de conversa ativamente?</p>
+                <label><input type="radio" name="q7" value="sim"> Sim</label>
+                <label><input type="radio" name="q7" value="nao"> Não</label>
+            </div>
+            <div class="question">
+                <p>8. Demonstra progresso na coordenação motora fina?</p>
+                <label><input type="radio" name="q8" value="sim"> Sim</label>
+                <label><input type="radio" name="q8" value="nao"> Não</label>
+            </div>
+            <div class="question">
+                <p>9. É solidário com os colegas durante as atividades?</p>
+                <label><input type="radio" name="q9" value="sim"> Sim</label>
+                <label><input type="radio" name="q9" value="nao"> Não</label>
+            </div>
+
+            <!-- Pergunta sobre Introversão -->
+            <div class="question">
+                <p>10. Apresenta introversão ao responder perguntas e atividades propostas em sala?</p>
+                <label><input type="radio" name="introversion" value="sim"> Sim</label>
+                <label><input type="radio" name="introversion" value="nao"> Não</label>
+            </div>
+
+            <!-- Adjetivos -->
+            <div class="question">
+                <p>Adjetivos para descrever o aluno:</p>
+                <label><input type="checkbox" name="adjectives" value="esforçado"> Esforçado(a)</label><br>
+                <label><input type="checkbox" name="adjectives" value="dedicado"> Dedicado</label><br>
+                <label><input type="checkbox" name="adjectives" value="prestativo"> Prestativo</label><br>
+                <label><input type="checkbox" name="adjectives" value="participativo"> Participativo</label><br>
+                <label><input type="checkbox" name="adjectives" value="solidario"> Solidário</label><br>
+                <label><input type="checkbox" name="adjectives" value="ativo"> Ativo</label><br>
+                <label><input type="checkbox" name="adjectives" value="nenhum"> Nenhum</label>
+            </div>
+
+            <button type="button" id="generate-btn">Gerar Relatório</button>
+        </form>
+        <div id="report" class="report"></div>
+    </div>
+
+    <script>
+        document.getElementById("generate-btn").addEventListener("click", function () {
+            const form = document.getElementById("report-form");
+
+            // Obtenha o nome e gênero do aluno
+            const studentName = document.getElementById("student-name").value.trim();
+            const gender = form.gender.value;
+
+            // Validação simples para garantir que os campos estão preenchidos
+            if (!studentName || !gender) {
+                alert("Por favor, preencha todos os campos obrigatórios.");
+                return;
+            }
+
+            const studentIntro = `Relatório de ${studentName} (${gender})`;
+
+            // Obter as respostas das perguntas
+            const answers = {
+                q1: form.q1.value,
+                q2: form.q2.value,
+                q3: form.q3.value,
+                q4: form.q4.value,
+                q5: form.q5.value,
+                q6: form.q6.value,
+                q7: form.q7.value,
+                q8: form.q8.value,
+                q9: form.q9.value,
+                introversion: form.introversion.value,
+            };
+
+            // Adjetivos
+            const adjectives = Array.from(form.querySelectorAll("input[name='adjectives']:checked"))
+                .map((checkbox) => checkbox.value)
+                .join(", ") || "Nenhum";
+
+            // Mensagens para o relatório
+            const points = [
+                answers.q1 === "sim" ? "Realizou todas as atividades enviadas para casa." : "Não realizou todas as atividades enviadas.",
+                answers.q2 === "sim" ? "Tem um bom relacionamento com os colegas." : "Ainda está desenvolvendo a interação social.",
+                answers.q3 === "sim" ? "Demonstra interesse por livros e histórias." : "Está começando a se interessar mais por livros.",
+                answers.q4 === "sim" ? "Participa das atividades recreativas com entusiasmo." : "Precisa de mais incentivo para participar das atividades recreativas.",
+                answers.q5 === "sim" ? "Respeita as regras e combinados em sala." : "Ainda precisa de apoio para seguir as regras consistentemente.",
+                answers.q6 === "sim" ? "Demonstra curiosidade em aprender novos conceitos." : "Ainda está desenvolvendo o interesse por novos conceitos.",
+                answers.q7 === "sim" ? "Participa ativamente das rodas de conversa." : "Precisa de mais confiança para participar das rodas de conversa.",
+                answers.q8 === "sim" ? "Demonstra progresso na coordenação motora fina." : "Precisa de mais prática para desenvolver a coordenação motora fina.",
+                answers.q9 === "sim" ? "É solidário com os colegas." : "Está aprendendo a importância de ser solidário com os colegas.",
+            ];
+
+            // Mensagem sobre introversão
+            const introversion = answers.introversion === "sim" ? "Porém, ainda apresenta introversão ao responder perguntas e atividades propostas em sala." : "Não apresenta introversão, participando de forma ativa nas atividades e interações.";
+
+            // Montar o relatório
+            const reportContent = `
+                <strong>${studentIntro}</strong><br><br>
+                ${points.join("<br><br>")}<br><br>
+                ${introversion}<br><br>
+                <strong>Qualidades Adicionais:</strong> ${adjectives}.<br><br>
+                Este relatório reflete o progresso e os pontos de atenção de ${studentName} durante este período. Continuaremos a acompanhar sua evolução e a trabalhar em suas necessidades específicas.
+            `;
+
+            // Exibir o relatório
+            document.getElementById("report").innerHTML = reportContent;
+        });
+    </script>
+</body>
+
+</html>
