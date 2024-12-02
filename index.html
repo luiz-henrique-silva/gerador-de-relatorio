@@ -207,20 +207,24 @@
     <script>
         document.getElementById("generate-btn").addEventListener("click", function () {
             const form = document.getElementById("report-form");
-
+    
             // Obtenha o nome e gênero do aluno
             const studentName = document.getElementById("student-name").value.trim();
             const gender = form.gender.value;
-
+    
             // Validação simples para garantir que os campos estão preenchidos
             if (!studentName || !gender) {
                 alert("Por favor, preencha todos os campos obrigatórios.");
                 return;
             }
-
-            const studentIntro = `Relatório de ${studentName} (${gender})`;
-
-            // Obter as respostas das perguntas
+    
+            // Escolher o pronome correto com base no gênero
+            const pronoun = gender === "feminino" ? "a aluna" : "o aluno";
+    
+            // Frase padrão com nome e gênero
+            const studentIntro = `Com base na análise do desenvolvimento de ${pronoun} ${studentName}, posso relatar que`;
+    
+            // Obter as respostas do formulário
             const answers = {
                 q1: form.q1.value,
                 q2: form.q2.value,
@@ -233,41 +237,44 @@
                 q9: form.q9.value,
                 introversion: form.introversion.value,
             };
-
+    
             // Adjetivos
             const adjectives = Array.from(form.querySelectorAll("input[name='adjectives']:checked"))
                 .map((checkbox) => checkbox.value)
                 .join(", ") || "Nenhum";
-
-            // Mensagens para o relatório
+    
+            // Construção dos pontos com base nas respostas
             const points = [
-                answers.q1 === "sim" ? "Realizou todas as atividades enviadas para casa." : "Não realizou todas as atividades enviadas.",
-                answers.q2 === "sim" ? "Tem um bom relacionamento com os colegas." : "Ainda está desenvolvendo a interação social.",
-                answers.q3 === "sim" ? "Demonstra interesse por livros e histórias." : "Está começando a se interessar mais por livros.",
-                answers.q4 === "sim" ? "Participa das atividades recreativas com entusiasmo." : "Precisa de mais incentivo para participar das atividades recreativas.",
-                answers.q5 === "sim" ? "Respeita as regras e combinados em sala." : "Ainda precisa de apoio para seguir as regras consistentemente.",
-                answers.q6 === "sim" ? "Demonstra curiosidade em aprender novos conceitos." : "Ainda está desenvolvendo o interesse por novos conceitos.",
-                answers.q7 === "sim" ? "Participa ativamente das rodas de conversa." : "Precisa de mais confiança para participar das rodas de conversa.",
-                answers.q8 === "sim" ? "Demonstra progresso na coordenação motora fina." : "Precisa de mais prática para desenvolver a coordenação motora fina.",
-                answers.q9 === "sim" ? "É solidário com os colegas." : "Está aprendendo a importância de ser solidário com os colegas.",
-            ];
-
+                answers.q1 === "sim" ? "Demonstrou responsabilidade ao completar todas as atividades enviadas para casa, evidenciando organização e compromisso." : "Nem todas as atividades enviadas para casa foram concluídas, mas está demonstrando maior interesse com o apoio oferecido pela família e pela escola.",
+                answers.q2 === "sim" ? "Mostrou facilidade em interagir com os colegas, promovendo um ambiente de cooperação e respeito." : "Apresentou desafios ao se relacionar com os colegas, mas está desenvolvendo habilidades sociais mais consistentes através das dinâmicas em grupo.",
+                answers.q3 === "sim" ? "Revela um interesse genuíno por livros e ilustrações, apreciando momentos de leitura e explorando com curiosidade os materiais." : "Ainda precisa de maior incentivo para se envolver com livros e histórias, mas tem mostrado progressos graduais durante as atividades de leitura compartilhada.",
+                answers.q4 === "sim" ? "Participa com entusiasmo das atividades recreativas, explorando diferentes formas de interação e movimento." : "Embora sua participação nas atividades recreativas seja mais reservada, está gradualmente se envolvendo com mais frequência e confiança.",
+                answers.q5 === "sim" ? "Demonstra atenção e respeito às regras e combinados da sala, contribuindo para um ambiente tranquilo e organizado." : "Em alguns momentos teve dificuldade em seguir as regras da sala, mas está aprendendo a compreender sua importância e aplicar esses combinados no dia a dia.",
+                answers.q6 === "sim" ? "Explorou novos conceitos com curiosidade e dedicação, aproveitando as atividades propostas para expandir seu aprendizado." : "Ainda apresenta certa hesitação para explorar novos conceitos, mas está progredindo ao engajar-se mais ativamente nas propostas em sala de aula.",
+                answers.q7 === "sim" ? "Enriqueceu as rodas de conversa com sua participação, ouvindo atentamente e compartilhando ideias de maneira clara." : "Participa com timidez nas rodas de conversa, mas vem desenvolvendo confiança para se expressar e contribuir com suas ideias.",
+                answers.q8 === "sim" ? "Avançou significativamente na coordenação motora fina, executando atividades com maior precisão e criatividade." : "Ainda em processo de desenvolvimento da coordenação motora fina, vem demonstrando esforço e avanço em atividades práticas.",
+                answers.q9 === "sim" ? "Atuou de forma solidária nas atividades em grupo, oferecendo apoio e demonstrando empatia pelos colegas." : "Apesar de enfrentar algumas dificuldades em atividades coletivas, está aprimorando sua habilidade de colaborar e ser solidário nas interações."
+            ].join(" ");
+    
             // Mensagem sobre introversão
-            const introversion = answers.introversion === "sim" ? "Porém, ainda apresenta introversão ao responder perguntas e atividades propostas em sala." : "Não apresenta introversão, participando de forma ativa nas atividades e interações.";
-
+            const introversion = answers.introversion === "sim" ? "Apesar disso, ainda apresenta introversão ao responder perguntas e realizar atividades propostas em sala." : "Não apresenta introversão, participando de forma ativa nas atividades e interações.";
+    
             // Montar o relatório
-            const reportContent = `
-                <strong>${studentIntro}</strong><br><br>
-                ${points.join("<br><br>")}<br><br>
-                ${introversion}<br><br>
-                <strong>Qualidades Adicionais:</strong> ${adjectives}.<br><br>
-                Este relatório reflete o progresso e os pontos de atenção de ${studentName} durante este período. Continuaremos a acompanhar sua evolução e a trabalhar em suas necessidades específicas.
+            const intro = `
+                Neste semestre, o planejamento foi desenvolvido de acordo com as diretrizes da Educação Infantil, buscando proporcionar experiências significativas para o crescimento social, emocional e cognitivo das crianças. 
+                As atividades foram elaboradas para estimular a interação e o respeito entre os colegas, além de promover a expressão dos sentimentos e a construção de habilidades importantes para o desenvolvimento integral.
             `;
-
+    
+            const conclusion = `
+                Em conclusão, o semestre foi marcado por avanços e superações, com ${studentName} demonstrando dedicação e empenho em várias áreas. 
+                Embora haja áreas que necessitem de mais atenção, o progresso é evidente, e com o apoio contínuo da família e da escola, ${studentName} continuará a se desenvolver de forma significativa.
+            `;
+    
             // Exibir o relatório
-            document.getElementById("report").innerHTML = reportContent;
+            document.getElementById("report").innerHTML = `${intro}<br><br>${studentIntro} ${points}<br><br>${introversion}<br><br><strong>Qualidades Adicionais:</strong> ${adjectives}.<br><br>${conclusion}`;
         });
     </script>
+    
 </body>
 
 </html>
